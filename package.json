@@ -13,9 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.23.3",
     "@babel/node": "^7.22.19",
-    "@babel/preset-env": "^7.23.3",
     "babel-core": "^6.26.3",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -31,5 +29,10 @@
     "path": "^0.12.7",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3"
   }
 }

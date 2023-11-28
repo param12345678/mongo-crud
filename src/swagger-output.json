@@ -1,0 +1,647 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Test API",
+    "description": ""
+  },
+  "host": "localhost:4001",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "token",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Register",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Register user",
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/user/users": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Uploads": {
+      "type": "object",
+      "properties": {}
+    },
+    "Pagination": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                }
+              }
+            },
+            "page": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "city": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "state": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "country": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        "isManual": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "boolean"
+            }
+          }
+        },
+        "longitude": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "number"
+            }
+          }
+        },
+        "latitude": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "example": "number"
+            }
+          }
+        }
+      },
+      "required": [
+        "name",
+        "city",
+        "state",
+        "country",
+        "isManual",
+        "longitude",
+        "latitude"
+      ]
+    },
+    "Register": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": ""
+        },
+        "authUserId": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "email",
+        "authUserId"
+      ]
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": ""
+        },
+        "password": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "Verify": {
+      "type": "object",
+      "properties": {
+        "authUserId": {
+          "type": "string",
+          "example": ""
+        },
+        "otp": {
+          "type": "string",
+          "example": ""
+        },
+        "role": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "authUserId",
+        "otp",
+        "role"
+      ]
+    },
+    "ResentOtp": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+    "ForgotPassword": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "VerifyForgotPassword": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": ""
+        },
+        "newPassword": {
+          "type": "string",
+          "example": ""
+        }
+      },
+      "required": [
+        "token",
+        "newPassword"
+      ]
+    },
+    "updatePassword": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "newPassword": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "password": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "updateProfile": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "address": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "dob": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "date"
+                }
+              }
+            },
+            "profileUrl": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Statuschange": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "status": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "boolean"
+                }
+              }
+            },
+            "reason": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Createcategory": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Category"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      }
+    },
+    "Createproject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "example": ""
+            },
+            "categoryId": {
+              "type": "string",
+              "example": ""
+            },
+            "userId": {
+              "type": "string",
+              "example": ""
+            },
+            "description": {
+              "type": "string",
+              "example": ""
+            },
+            "amount": {
+              "type": "string",
+              "example": ""
+            },
+            "websiteUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "facebookUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "instagramUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "twitterUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "linkedinUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "rewardTitle": {
+              "type": "string",
+              "example": ""
+            },
+            "rewardDescription": {
+              "type": "string",
+              "example": ""
+            },
+            "quantity": {
+              "type": "string",
+              "example": ""
+            },
+            "estimatedDelivery": {
+              "type": "string",
+              "example": ""
+            },
+            "documents": {
+              "type": "array",
+              "example": [],
+              "items": {}
+            },
+            "bannerImage": {
+              "type": "string",
+              "example": ""
+            },
+            "status": {
+              "type": "string",
+              "example": ""
+            },
+            "duration": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "required": [
+            "title",
+            "categoryId",
+            "userId",
+            "description",
+            "amount",
+            "websiteUrl",
+            "facebookUrl",
+            "instagramUrl",
+            "twitterUrl",
+            "linkedinUrl",
+            "rewardTitle",
+            "rewardDescription",
+            "quantity",
+            "estimatedDelivery",
+            "documents",
+            "bannerImage",
+            "status",
+            "duration"
+          ]
+        }
+      }
+    },
+    "Updateproject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": ""
+            },
+            "title": {
+              "type": "string",
+              "example": ""
+            },
+            "categoryId": {
+              "type": "string",
+              "example": ""
+            },
+            "userId": {
+              "type": "string",
+              "example": ""
+            },
+            "description": {
+              "type": "string",
+              "example": ""
+            },
+            "amount": {
+              "type": "string",
+              "example": ""
+            },
+            "websiteUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "facebookUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "instagramUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "twitterUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "linkedinUrl": {
+              "type": "string",
+              "example": ""
+            },
+            "rewardTitle": {
+              "type": "string",
+              "example": ""
+            },
+            "rewardDescription": {
+              "type": "string",
+              "example": ""
+            },
+            "quantity": {
+              "type": "string",
+              "example": ""
+            },
+            "estimatedDelivery": {
+              "type": "string",
+              "example": ""
+            },
+            "documents": {
+              "type": "array",
+              "example": [],
+              "items": {}
+            },
+            "bannerImage": {
+              "type": "string",
+              "example": ""
+            },
+            "status": {
+              "type": "string",
+              "example": ""
+            },
+            "duration": {
+              "type": "string",
+              "example": ""
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "categoryId",
+            "userId",
+            "description",
+            "amount",
+            "websiteUrl",
+            "facebookUrl",
+            "instagramUrl",
+            "twitterUrl",
+            "linkedinUrl",
+            "rewardTitle",
+            "rewardDescription",
+            "quantity",
+            "estimatedDelivery",
+            "documents",
+            "bannerImage",
+            "status",
+            "duration"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,6 @@ import Product from '../models/Proudct';
 
 export const create = async (req, body) => {
     try {
-
         const createdBy = req.decoded.userId
         const { name, description, price } = body;
         const product = new Product({ name, description, price, createdBy: createdBy });

@@ -1,104 +1,75 @@
-// src/services/userService.js
-import User from '../models/User';
-import bcrypt from 'bcrypt';
-import { createToken } from '../middlewares/token';
-import { sendPasswordResetEmail } from '../utils/emailService';
+import Order from '../models/Order';
 
-export const signUp = async (body) => {
-
+export const create = async (req, body) => {
     try {
-        const { username, email, password } = body;
-
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            throw 'USER_ALREADY_EXIST';
-        }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, email, password: hashedPassword });
-        await user.save();
-        return user;
+        const userId = req.decoded.userId
+        const { totalAmount, productId } = body;
+        const order = new Order({ totalAmount, userId, productId });
+        await order.save();
+        return order;
     } catch (err) {
         throw err;
     }
 };
 
 
-export const login = async ({ email, password }) => {
+export const _getOrders = async () => {
     try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            throw ('Invalid email');
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        const tData = { userId: user._id, email: user.email }
-
-        if (!isPasswordValid) {
-            throw ('Invalid password');
-        }
-
-        const token = createToken(tData);
-        return { user, token };
-    } catch (error) {
-        console.log("error: ", error);
-        throw error;
-    }
-};
-export const _forgotPassword = async ({ email, password }) => {
-    try {
-        const user = await User.findOne({ email });
-        if (!user) {
-            throw ('Invalid email');
-        }
-
-        const resetLink = 'http://your-website.com/reset-password/';
-        // Send the password reset email
-        await sendPasswordResetEmail(user, resetLink);
-        return user;
+        const orders = await Order.find()
+        return orders;
     } catch (error) {
         console.log("error: ", error);
         throw error;
     }
 };
 
-export const _getProfile = async (req) => {
+export const _getOrderById = async (orderId) => {
     try {
-        const id = req.decoded.userId
-        const user = await User.findById(id);
-        if (!user) {
-            throw 'No user found'
+        const order = await Order.findById(orderId);
+        if (!order) {
+            throw 'Order not found';
         }
-        return user;
+        return order;
     } catch (error) {
         console.log("error: ", error);
         throw error;
     }
 };
 
-export const updateProfile = async (userId, updatedData) => {
+export const _updateOrder = async (orderId, updatedData) => {
     try {
-        console.log("userId: ", userId);
-        // Use findByIdAndUpdate to find the user by ID and update the fields
-        const user = await User.findByIdAndUpdate(
-            userId,
+        // Use findByIdAndUpdate to find the product by ID and update the fields
+        const order = await Order.findByIdAndUpdate(
+            orderId,
             {
                 $set: updatedData,
             },
             {
                 new: true, // Return the modified document rather than the original
                 runValidators: true, // Run validators to ensure the updated data is valid
-                upsert: true,
             }
         );
 
-        if (!user) {
-            throw 'USER_NOT_FOUND';
+        if (!order) {
+            throw 'Order not found';
         }
-        return user;
+        return order;
     } catch (err) {
+        console.log("error: ", err);
         throw err;
     }
 };
 
+export const _deleteOrder = async (productId) => {
+    try {
+        const product = await Order.findByIdAndDelete(productId);
 
-
+        if (!product) {
+            throw 'Product not found';
+        }
+        return product;
+    } catch (err) {
+        console.log("error: ", err);
+        throw err;
+    }
+};
